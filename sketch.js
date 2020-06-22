@@ -1,17 +1,25 @@
 let imagemCenario;
 let imagemPersonagem;
 let cenario;
+let trilhaSonora;
 
 //Essa função será chamada antes de todas as outras
 function preload() {
     imagemCenario = loadImage('assets/imagens/cenario/floresta.png')
     imagemPersonagem = loadImage('assets/imagens/personagem/correndo.png')
+    trilhaSonora = loadSound('assets/sons/trilha_jogo.mp3')
 }
 
 function setup() {
     //Cria um canvas com tamanho dinâmico (largura e altura da tela)
     createCanvas(windowWidth, windowHeight);
     cenario = new Cenario(imagemCenario, 3)
+
+    //Executa a música apenas uma vez
+    // trilhaSonora.play()
+
+    //Executa a música várias vezes
+    trilhaSonora.loop()
 }
   
 //Essa função será chamada infinitas vezes
