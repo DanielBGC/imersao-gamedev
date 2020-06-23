@@ -71,16 +71,7 @@ function preload() {
 function setup() {
     //Cria um canvas com tamanho dinâmico (largura e altura da tela)
     createCanvas(windowWidth, windowHeight);
-    cenario = new Cenario(imagemCenario, 5)
-    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 110, 135, 220, 270)
-    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 52, 52, 104, 104)
-
-
-    //Executa a música apenas uma vez
-    // trilhaSonora.play()
-
-    //Executa a música várias vezes
-    trilhaSonora.loop()
+    resetSketch()
 
     frameRate(30)
 }
@@ -91,6 +82,26 @@ function keyPressed() {
         personagem.pula()
         somPulo.play()
     }
+    
+    if(key === 'Enter') {
+        //reseta o jogo quando apertar a tecla Enter
+        resetSketch()
+    }
+}
+
+//Reseta todo o jogo quando chamada
+function resetSketch() {
+    cenario = new Cenario(imagemCenario, 5)
+    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 110, 135, 220, 270)
+    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 52, 52, 104, 104)
+
+    //Executa a música apenas uma vez
+    // trilhaSonora.play()
+
+    trilhaSonora.stop()
+    //Executa a música várias vezes
+    trilhaSonora.loop()
+    loop()
 }
   
 //Essa função será chamada infinitas vezes
