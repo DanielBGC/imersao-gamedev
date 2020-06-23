@@ -15,7 +15,18 @@ class Personagem extends Animacao {
             this.quantidadesDePulos--;
             somPulo.play()
         }
-        
+    }
+
+    anda(direçao) {
+        this.x = this.x
+        if(direçao == "frente") {
+            if(this.x < width - this.largura)
+                this.x += 10
+        }
+        if(direçao == "tras") {
+            if(this.x > 0)
+                this.x -= 10
+        }
     }
 
     aplicaGravidade() {

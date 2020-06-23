@@ -113,6 +113,12 @@ function draw() {
     personagem.exibe();
     personagem.move();
     personagem.aplicaGravidade();
+    personagem.anda()
+
+    if(keyIsDown(RIGHT_ARROW))
+        personagem.anda('frente')
+    if(keyIsDown(LEFT_ARROW))
+        personagem.anda('tras')
     
     inimigo.exibe();
     inimigo.move();
