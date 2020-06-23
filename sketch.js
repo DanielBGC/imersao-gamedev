@@ -6,6 +6,27 @@ let personagem;
 let inimigo;
 let trilhaSonora;
 
+//Mapeamento da imagem do personagem
+const matrizPersonagem = matriz = [
+    [0,0],
+    [220, 0],
+    [440, 0],
+    [660, 0],
+    [0,270],
+    [220, 270],
+    [440, 270],
+    [660, 270],
+    [0,540],
+    [220, 540],
+    [440, 540],
+    [660, 540],
+    [0,810],
+    [220, 810],
+    [440, 810],
+    [660, 810],
+]
+
+//Mapeamento da imagem do inimigo
 const matrizInimigo = [
     [0, 0],
     [104, 0],
@@ -35,7 +56,7 @@ const matrizInimigo = [
     [104, 626],
     [208, 626],
     [312, 626],
-  ]
+]
 
 //Essa função será chamada antes de todas as outras
 function preload() {
@@ -49,7 +70,7 @@ function setup() {
     //Cria um canvas com tamanho dinâmico (largura e altura da tela)
     createCanvas(windowWidth, windowHeight);
     cenario = new Cenario(imagemCenario, 5)
-    personagem = new Personagem(imagemPersonagem)
+    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 110, 135, 220, 270)
     inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 52, 52, 104, 104)
 
 
@@ -61,6 +82,13 @@ function setup() {
 
     frameRate(30)
 }
+
+//Observa se o usuário apertou algum botão
+function keyPressed() {
+    if(key === 'ArrowUp') {
+        personagem.pula()
+    }
+}
   
 //Essa função será chamada infinitas vezes
 function draw() {
@@ -70,6 +98,7 @@ function draw() {
 
     personagem.exibe();
     personagem.move();
+    personagem.aplicaGravidade();
     
     inimigo.exibe();
     inimigo.move();
