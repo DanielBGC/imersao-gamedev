@@ -73,6 +73,7 @@ function draw() {
     
     inimigo.exibe();
     inimigo.move();
+    inimigo.anda();
 
     //circle(x, y, raio)
     // circle(mouseX, mouseY, 10)
