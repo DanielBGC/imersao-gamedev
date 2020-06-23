@@ -104,6 +104,12 @@ function draw() {
     inimigo.move();
     inimigo.anda();
 
+    if(personagem.estaColidindo(inimigo)) {
+        noLoop()
+    }
+
+   
+
     //circle(x, y, raio)
     // circle(mouseX, mouseY, 10)
 }
