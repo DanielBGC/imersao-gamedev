@@ -5,6 +5,7 @@ let cenario;
 let personagem;
 let inimigo;
 let trilhaSonora;
+let somPulo;
 
 //Mapeamento da imagem do personagem
 const matrizPersonagem = matriz = [
@@ -64,6 +65,7 @@ function preload() {
     imagemPersonagem = loadImage('assets/imagens/personagem/correndo.png')
     imagemInimigo = loadImage('assets/imagens/inimigos/gotinha.png')
     trilhaSonora = loadSound('assets/sons/trilha_jogo.mp3')
+    somPulo = loadSound('assets/sons/somPulo.mp3')
 }
 
 function setup() {
@@ -78,15 +80,16 @@ function setup() {
     // trilhaSonora.play()
 
     //Executa a música várias vezes
-    // trilhaSonora.loop()
+    trilhaSonora.loop()
 
     frameRate(30)
 }
 
 //Observa se o usuário apertou algum botão
 function keyPressed() {
-    if(key === 'ArrowUp') {
+    if(key === 'ArrowUp' || key === 'w') {
         personagem.pula()
+        somPulo.play()
     }
 }
   
@@ -106,6 +109,7 @@ function draw() {
 
     if(personagem.estaColidindo(inimigo)) {
         noLoop()
+        trilhaSonora.stop()
     }
 
    

@@ -10,20 +10,24 @@ class Personagem extends Animacao {
 
     pula() {
         //limita o pulo para 1
-        if(this.y == this.yInicial)
+        if(this.quantidadesDePulos > 0) {
             this.pulo = - 40;
+            this.quantidadesDePulos--;
+        }
     }
 
     aplicaGravidade() {
         this.y += this.pulo;
         this.pulo += this.gravidade;
 
-        if(this.y > this.yInicial)   
+        if(this.y > this.yInicial) {
             this.y = this.yInicial
+            this.quantidadesDePulos = 2;
+        }
     }
 
     estaColidindo(inimigo) {
-        const precisao = 0.7
+        const precisao = 0.63
         const colisao = collideRectRect(
             this.x, 
             this.y, 
