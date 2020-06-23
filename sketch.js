@@ -80,7 +80,7 @@ function setup() {
 function keyPressed() {
     if(key === 'ArrowUp' || key === 'w') {
         personagem.pula()
-        somPulo.play()
+        
     }
     
     if(key === 'Enter') {

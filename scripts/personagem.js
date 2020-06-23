@@ -13,7 +13,9 @@ class Personagem extends Animacao {
         if(this.quantidadesDePulos > 0) {
             this.pulo = - 40;
             this.quantidadesDePulos--;
+            somPulo.play()
         }
+        
     }
 
     aplicaGravidade() {
