@@ -1,8 +1,9 @@
 class Personagem extends Animacao {
-    constructor(matriz, imagem, x, largura, altura, larguraSprite, alturaSprite) {
-        super(matriz, imagem, x, largura, altura, larguraSprite, alturaSprite)
+    constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite) {
+        super(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite)
 
-        this.yInicial = height - altura - 15;
+        this.variacaoY = variacaoY;
+        this.yInicial = height - altura - variacaoY;
         this.y = this.yInicial;
         this.gravidade = 5;
         this.pulo = 0;

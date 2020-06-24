@@ -78,7 +78,7 @@ function setup() {
 
 //Observa se o usuário apertou algum botão
 function keyPressed() {
-    if(key === 'ArrowUp' || key === 'w') {
+    if(key === 'ArrowUp' || key === 'w' || keyCode === 32) {
         personagem.pula()
         
     }
@@ -92,15 +92,15 @@ function keyPressed() {
 //Reseta todo o jogo quando chamada
 function resetSketch() {
     cenario = new Cenario(imagemCenario, 5)
-    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 110, 135, 220, 270)
-    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 52, 52, 104, 104)
+    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270)
+    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104)
+    trilhaSonora.stop()
 
     //Executa a música apenas uma vez
     // trilhaSonora.play()
 
-    trilhaSonora.stop()
     //Executa a música várias vezes
-    trilhaSonora.loop()
+    // trilhaSonora.loop()
     loop()
 }
   
