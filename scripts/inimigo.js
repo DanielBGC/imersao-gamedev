@@ -1,11 +1,12 @@
 //Importa tudo que tem na classe Animacao para a classe Inimigo
 class Inimigo extends Animacao {
-    constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite, velocidade, delay) {
+    constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite, velocidade, delay, precisao) {
         super(matriz, imagem, x, variacaoY,  largura, altura, larguraSprite, alturaSprite)
 
         this.velocidade = velocidade;
         this.delay = delay;
         this.x = width + this.delay
+        this.precisao = precisao;
     }
 
     //move o inimigo em direção ao personagem
@@ -15,4 +16,5 @@ class Inimigo extends Animacao {
             this.x = width;
         }
     }
+
 }

@@ -158,9 +158,9 @@ function startSketch() {
     pontuacao = new Pontuacao()
     personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270)
 
-    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200)
-    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 1200)
-    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 1500)
+    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200, 0.62)
+    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 1200, 0.55)
+    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 1500, 0.55)
 
     inimigos.push(inimigo)
     inimigos.push(inimigoVoador)
@@ -209,7 +209,7 @@ function draw() {
         inimigo.exibe();
         inimigo.move();
         inimigo.anda();
-        if(personagem.estaColidindo(inimigo)) {
+        if(personagem.estaColidindo(inimigo, inimigo.precisao)) {
             image(imagemGameOver, width/2 - 200, height/2 - 200)
             noLoop()
             trilhaSonora.stop()

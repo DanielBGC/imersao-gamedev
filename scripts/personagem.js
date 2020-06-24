@@ -40,8 +40,7 @@ class Personagem extends Animacao {
         }
     }
 
-    estaColidindo(inimigo) {
-        const precisao = 0.63
+    estaColidindo(inimigo, precisao) {
         const colisao = collideRectRect(
             this.x, 
             this.y, 
@@ -50,7 +49,7 @@ class Personagem extends Animacao {
             inimigo.x,
             inimigo.y,
             inimigo.largura * precisao,
-            inimigo.altura * precisao
+            inimigo.altura * (precisao - 0.1)
             )
 
         return colisao;
