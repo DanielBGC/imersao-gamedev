@@ -120,6 +120,8 @@ const matrizInimigoVoador = [
     [0, 750],
 ]
 
+const inimigos = []
+
 //Essa função será chamada antes de todas as outras
 function preload() {
     imagemCenario = loadImage('assets/imagens/cenario/floresta.png')
@@ -153,13 +155,17 @@ function keyPressed() {
 
 //Reseta todo o jogo quando chamada
 function startSketch() {
+    trilhaSonora.stop()
     cenario = new Cenario(imagemCenario, 5)
     personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270)
 
-    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200)
-    inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 1200)
-    inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 1500)
-    trilhaSonora.stop()
+    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200)
+    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 1200)
+    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 1500)
+
+    inimigos.push(inimigo)
+    inimigos.push(inimigoVoador)
+    inimigos.push(inimigoTroll)
 
     //Executa a música apenas uma vez
     // trilhaSonora.play()
@@ -184,27 +190,17 @@ function draw() {
         personagem.anda('frente')
     if(keyIsDown(LEFT_ARROW))
         personagem.anda('tras')
-    
-    inimigo.exibe();
-    inimigo.move();
-    inimigo.anda();
 
-    inimigoTroll.exibe();
-    inimigoTroll.move();
-    inimigoTroll.anda();
-
-    inimigoVoador.exibe();
-    inimigoVoador.move();
-    inimigoVoador.anda();
-
-
-    if(personagem.estaColidindo(inimigo) || personagem.estaColidindo(inimigoTroll) || personagem.estaColidindo(inimigoVoador)) {
-        noLoop()
-        trilhaSonora.stop()
-    }
-
+    inimigos.forEach(inimigo => {
+        inimigo.exibe();
+        inimigo.move();
+        inimigo.anda();
+        if(personagem.estaColidindo(inimigo)) {
+            noLoop()
+            trilhaSonora.stop()
+        }
+    });
    
-
     //circle(x, y, raio)
     // circle(mouseX, mouseY, 10)
 }
