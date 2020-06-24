@@ -1,9 +1,18 @@
-let imagemCenario;
-let imagemPersonagem;
-let imagemInimigo;
 let cenario;
+let imagemCenario;
+
 let personagem;
+let imagemPersonagem;
+
 let inimigo;
+let imagemInimigo;
+
+let inimigoTroll;
+let imagemInimigoTroll;
+
+let inimigoVoador;
+let imagemInimigoVoador;
+
 let trilhaSonora;
 let somPulo;
 
@@ -59,11 +68,65 @@ const matrizInimigo = [
     [312, 626],
 ]
 
+//Mapeamento da imagem do troll
+const matrizInimigoTroll = [
+    [0,0],
+    [400,0],
+    [800,0],
+    [1200,0],
+    [1600,0],
+    [0,400],
+    [400,400],
+    [800,400],
+    [1200, 400],
+    [1600, 400],
+    [0,800],
+    [400, 800],
+    [800, 800],
+    [1200, 800],
+    [1600, 800],
+    [0, 1200],
+    [400, 1200],
+    [800, 1200],
+    [1200, 1200],
+    [1600, 1200], 
+    [0, 1600],
+    [400, 1600],
+    [800, 1600],
+    [1200, 1600],
+    [1600, 1600],
+    [0, 2000],
+    [400, 2000],
+    [800, 2000],
+]
+
+//Mapeamento da imagem do inimigo voador
+const matrizInimigoVoador = [
+    [0,0],
+    [200, 0],
+    [400, 0],
+    [0, 150],
+    [200, 150],
+    [400, 150],
+    [0, 300],
+    [200, 300],
+    [400, 300],
+    [0, 450],
+    [200, 450],
+    [400, 450],
+    [0, 600],
+    [200, 600],
+    [400, 600],
+    [0, 750],
+]
+
 //Essa função será chamada antes de todas as outras
 function preload() {
     imagemCenario = loadImage('assets/imagens/cenario/floresta.png')
     imagemPersonagem = loadImage('assets/imagens/personagem/correndo.png')
     imagemInimigo = loadImage('assets/imagens/inimigos/gotinha.png')
+    imagemInimigoTroll = loadImage('assets/imagens/inimigos/troll.png')
+    imagemInimigoVoador = loadImage('assets/imagens/inimigos/gotinha-voadora.png')
     trilhaSonora = loadSound('assets/sons/trilha_jogo.mp3')
     somPulo = loadSound('assets/sons/somPulo.mp3')
 }
@@ -71,7 +134,7 @@ function preload() {
 function setup() {
     //Cria um canvas com tamanho dinâmico (largura e altura da tela)
     createCanvas(windowWidth, windowHeight);
-    resetSketch()
+    startSketch()
 
     frameRate(30)
 }
@@ -80,20 +143,22 @@ function setup() {
 function keyPressed() {
     if(key === 'ArrowUp' || key === 'w' || keyCode === 32) {
         personagem.pula()
-        
     }
     
     if(key === 'Enter') {
         //reseta o jogo quando apertar a tecla Enter
-        resetSketch()
+        startSketch()
     }
 }
 
 //Reseta todo o jogo quando chamada
-function resetSketch() {
+function startSketch() {
     cenario = new Cenario(imagemCenario, 5)
     personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270)
-    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104)
+
+    inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200)
+    inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 1200)
+    inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 1500)
     trilhaSonora.stop()
 
     //Executa a música apenas uma vez
@@ -124,7 +189,16 @@ function draw() {
     inimigo.move();
     inimigo.anda();
 
-    if(personagem.estaColidindo(inimigo)) {
+    inimigoTroll.exibe();
+    inimigoTroll.move();
+    inimigoTroll.anda();
+
+    inimigoVoador.exibe();
+    inimigoVoador.move();
+    inimigoVoador.anda();
+
+
+    if(personagem.estaColidindo(inimigo) || personagem.estaColidindo(inimigoTroll) || personagem.estaColidindo(inimigoVoador)) {
         noLoop()
         trilhaSonora.stop()
     }
