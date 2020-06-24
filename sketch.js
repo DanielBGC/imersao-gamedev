@@ -15,6 +15,7 @@ let imagemInimigoVoador;
 
 let trilhaSonora;
 let somPulo;
+let pontuacao;
 
 //Mapeamento da imagem do personagem
 const matrizPersonagem = matriz = [
@@ -141,22 +142,16 @@ function setup() {
     frameRate(30)
 }
 
-//Observa se o usuário apertou algum botão
-function keyPressed() {
-    if(key === 'ArrowUp' || key === 'w' || keyCode === 32) {
-        personagem.pula()
-    }
-    
-    if(key === 'Enter') {
-        //reseta o jogo quando apertar a tecla Enter
-        startSketch()
-    }
-}
-
 //Reseta todo o jogo quando chamada
 function startSketch() {
     trilhaSonora.stop()
+
+    //Esvazia o array sempre que um jogo jogo é iniciado
+    while(inimigos.length)
+        inimigos.pop()
+
     cenario = new Cenario(imagemCenario, 5)
+    pontuacao = new Pontuacao()
     personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270)
 
     const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200)
@@ -174,12 +169,27 @@ function startSketch() {
     // trilhaSonora.loop()
     loop()
 }
+
+//Observa se o usuário apertou algum botão
+function keyPressed() {
+    if(key === 'ArrowUp' || key === 'w' || keyCode === 32) {
+        personagem.pula()
+    }
+    
+    if(key === 'Enter') {
+        //reseta o jogo quando apertar a tecla Enter
+        startSketch()
+    }
+}
   
 //Essa função será chamada infinitas vezes
 function draw() {
     // background(imagemCenario);
     cenario.exibe();
     cenario.move();
+
+    pontuacao.exibe();
+    pontuacao.incremento();
 
     personagem.exibe();
     personagem.move();

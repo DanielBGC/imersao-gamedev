@@ -11,7 +11,8 @@ class Inimigo extends Animacao {
     //move o inimigo em direção ao personagem
     anda() {
         this.x = this.x - this.velocidade;
-        if(this.x < -this.largura - this.delay)
+        if(this.x < -this.largura - this.delay) {
             this.x = width;
+        }
     }
 }
