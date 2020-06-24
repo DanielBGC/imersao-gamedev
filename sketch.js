@@ -15,7 +15,9 @@ let imagemInimigoVoador;
 
 let trilhaSonora;
 let somPulo;
+
 let pontuacao;
+let imagemGameOver;
 
 //Mapeamento da imagem do personagem
 const matrizPersonagem = matriz = [
@@ -130,6 +132,8 @@ function preload() {
     imagemInimigo = loadImage('assets/imagens/inimigos/gotinha.png')
     imagemInimigoTroll = loadImage('assets/imagens/inimigos/troll.png')
     imagemInimigoVoador = loadImage('assets/imagens/inimigos/gotinha-voadora.png')
+    imagemGameOver = loadImage('assets/imagens/assets/game-over.png')
+
     trilhaSonora = loadSound('assets/sons/trilha_jogo.mp3')
     somPulo = loadSound('assets/sons/somPulo.mp3')
 }
@@ -206,6 +210,7 @@ function draw() {
         inimigo.move();
         inimigo.anda();
         if(personagem.estaColidindo(inimigo)) {
+            image(imagemGameOver, width/2 - 200, height/2 - 200)
             noLoop()
             trilhaSonora.stop()
         }
