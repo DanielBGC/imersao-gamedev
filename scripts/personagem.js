@@ -1,32 +1,44 @@
 class Personagem extends Animacao {
-    constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite) {
-        super(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite)
+    constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite, precisaoX, precisaoY, precisaoLargura, precisaoAltura) {
+        super(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite, precisaoX, precisaoY, precisaoLargura, precisaoAltura)
 
         this.variacaoY = variacaoY;
         this.yInicial = height - altura - variacaoY;
         this.y = this.yInicial;
         this.gravidade = 5;
         this.pulo = 0;
+
+        this.precisaoX = precisaoX;
+        this.precisaoY = precisaoY;
+        this.precisaoAltura = precisaoAltura;
+        this.precisaoLargura = precisaoLargura;
     }
 
     pula() {
-        //limita o pulo para 1
+        //limita o pulo para 2
         if(this.quantidadesDePulos > 0) {
             this.pulo = - 40;
             this.quantidadesDePulos--;
             somPulo.play()
         }
+
+        this.precisaoY += 10;
     }
 
     anda(direçao) {
         this.x = this.x
         if(direçao == "frente") {
-            if(this.x < width - this.largura)
+            if(this.x < width - this.largura) {
                 this.x += 10
+                this.precisaoX = 10;
+            }
         }
-        if(direçao == "tras") {
+        else if(direçao == "tras") {
             if(this.x > 0)
-                this.x -= 10
+                this.x -= 5;
+        }
+        else {
+            this.precisaoX = 20;
         }
     }
 
@@ -37,19 +49,22 @@ class Personagem extends Animacao {
         if(this.y > this.yInicial) {
             this.y = this.yInicial
             this.quantidadesDePulos = 2;
+            
+            this.precisaoY = 10;
         }
     }
 
-    estaColidindo(inimigo, precisao) {
+    estaColidindo(inimigo, precisaoX, precisaoY, precisaoLargura, precisaoAltura) {
+
         const colisao = collideRectRect(
-            this.x, 
-            this.y, 
-            this.largura * precisao, 
-            this.altura * precisao,
-            inimigo.x,
-            inimigo.y,
-            inimigo.largura * precisao,
-            inimigo.altura * (precisao - 0.1)
+            this.x + this.precisaoX, 
+            this.y + this.precisaoY, 
+            this.largura - this.precisaoLargura,
+            this.altura - this.precisaoAltura,
+            inimigo.x + precisaoX,
+            inimigo.y + precisaoY,
+            inimigo.largura - precisaoLargura,
+            inimigo.altura - precisaoAltura
             )
 
         return colisao;

@@ -156,11 +156,12 @@ function startSketch() {
 
     cenario = new Cenario(imagemCenario, 5)
     pontuacao = new Pontuacao()
-    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270)
+    personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270, 20, 10, 40, 10)
 
-    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200, 0.62)
-    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 1200, 0.55)
-    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 1500, 0.55)
+    //constructor(matriz, imagem, X, Y, largura, atura, larguraSprite, alturaSprite, velocidade, delay, precisaoX, precisaoY, precisaoLargura, precisaoAltura)
+    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200, 20, 30, 20, 30)
+    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 2000, 30, 50, 50, 70)
+    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 150, 100, 100, 150, 130)
 
     inimigos.push(inimigo)
     inimigos.push(inimigoVoador)
@@ -209,7 +210,7 @@ function draw() {
         inimigo.exibe();
         inimigo.move();
         inimigo.anda();
-        if(personagem.estaColidindo(inimigo, inimigo.precisao)) {
+        if(personagem.estaColidindo(inimigo, inimigo.precisaoX, inimigo.precisaoY, inimigo.precisaoLargura, inimigo.precisaoAltura)) {
             image(imagemGameOver, width/2 - 200, height/2 - 200)
             noLoop()
             trilhaSonora.stop()
