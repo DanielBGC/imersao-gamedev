@@ -1,5 +1,12 @@
 let jogo;
 
+let telaInicial;
+let imagemTelaInicial;
+let fonteTelaInicial;
+
+let cenas;
+let cenaAtual = 'telaInicial';
+
 let cenario;
 let imagemCenario;
 

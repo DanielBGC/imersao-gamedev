@@ -1,5 +1,8 @@
 //Essa função será chamada antes de todas as outras
 function preload() {
+    imagemTelaInicial = loadImage('assets/imagens/assets/telaInicial.png')
+    fonteTelaInicial = loadFont('assets/imagens/assets/fonteTelaInicial.otf')
+
     imagemCenario = loadImage('assets/imagens/cenario/floresta.png')
     imagemPersonagem = loadImage('assets/imagens/personagem/correndo.png')
 
@@ -20,6 +23,13 @@ function setup() {
     jogo = new Jogo()
     jogo.startJogo()
 
+    telaInicial = new TelaInicial()
+
+    cenas = {
+        jogo: jogo,
+        telaInicial: telaInicial
+    }
+
     frameRate(30)
 }
 
@@ -30,8 +40,7 @@ function keyPressed() {
 
 //Essa função será chamada infinitas vezes
 function draw() {
-    jogo.draw()
-
+    cenas[cenaAtual].draw()
     //circle(x, y, raio)
     // circle(mouseX, mouseY, 10)
 }
