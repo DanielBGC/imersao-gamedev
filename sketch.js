@@ -4,6 +4,8 @@ let imagemCenario;
 let personagem;
 let imagemPersonagem;
 
+let indexInimigoAtual = 0;
+
 let inimigo;
 let imagemInimigo;
 
@@ -159,9 +161,9 @@ function startSketch() {
     personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270, 20, 10, 40, 10)
 
     //constructor(matriz, imagem, X, Y, largura, atura, larguraSprite, alturaSprite, velocidade, delay, precisaoX, precisaoY, precisaoLargura, precisaoAltura)
-    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 200, 20, 30, 20, 30)
-    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 2000, 30, 50, 50, 70)
-    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 150, 100, 100, 150, 130)
+    const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 100, 20, 30, 20, 30)
+    const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 100, 30, 50, 50, 70)
+    const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 100, 100, 100, 150, 130)
 
     inimigos.push(inimigo)
     inimigos.push(inimigoVoador)
@@ -206,16 +208,33 @@ function draw() {
     if(keyIsDown(LEFT_ARROW))
         personagem.anda('tras')
 
-    inimigos.forEach(inimigo => {
-        inimigo.exibe();
-        inimigo.move();
-        inimigo.anda();
-        if(personagem.estaColidindo(inimigo, inimigo.precisaoX, inimigo.precisaoY, inimigo.precisaoLargura, inimigo.precisaoAltura)) {
-            image(imagemGameOver, width/2 - 200, height/2 - 200)
-            noLoop()
-            trilhaSonora.stop()
-        }
-    });
+    const inimigo = inimigos[indexInimigoAtual];
+
+    //Condição pra saber se o inimigo está visivel na tela
+    const inimigoVisivel = inimigo.x < - inimigo.largura;
+
+    inimigo.exibe();
+    inimigo.move();
+    inimigo.anda();
+
+    if(inimigoVisivel) {
+        // indexInimigoAtual++;
+        // if(indexInimigoAtual > 2) {
+        //     indexInimigoAtual = 0;
+        // }
+
+        //randomiza a ordem de aparição dos inimigos
+        indexInimigoAtual = parseInt(random(0,inimigos.length))
+
+        //randomiza a velocidade de cada inimigo
+        inimigo.velocidade = parseInt(random(10,30))
+    }
+
+    if(personagem.estaColidindo(inimigo, inimigo.precisaoX, inimigo.precisaoY, inimigo.precisaoLargura, inimigo.precisaoAltura)) {
+        image(imagemGameOver, width/2 - 200, height/2 - 200)
+        noLoop()
+        trilhaSonora.stop()
+    }
    
     //circle(x, y, raio)
     // circle(mouseX, mouseY, 10)
