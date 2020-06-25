@@ -1,10 +1,10 @@
+let jogo;
+
 let cenario;
 let imagemCenario;
 
 let personagem;
 let imagemPersonagem;
-
-let indexInimigoAtual = 0;
 
 let inimigo;
 let imagemInimigo;
