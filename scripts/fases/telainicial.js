@@ -6,6 +6,7 @@ class TelaInicial {
     draw() {
         this._imagemDeFundo()
         this._texto()
+        this._botao()
     }
     
     //"métodos privados"
@@ -16,11 +17,16 @@ class TelaInicial {
     _texto() {
         textFont(fonteTelaInicial)
         textAlign(CENTER)
-        fill('white')
+        fill('black')
 
         textSize(100);
         text('As aventuras de', width/2,  100)
         textSize(150);
         text('Hipsta', width/2, 200)
+    }
+
+    _botao() {
+        botao.y = height - 100;
+        botao.draw()
     }
 }

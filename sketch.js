@@ -23,6 +23,8 @@ function setup() {
     jogo = new Jogo()
     jogo.startJogo()
 
+    botao = new Botao('Iniciar jogo', width/2, 300)
+
     telaInicial = new TelaInicial()
 
     cenas = {

@@ -1,5 +1,7 @@
 let jogo;
 
+let botao;
+
 let telaInicial;
 let imagemTelaInicial;
 let fonteTelaInicial;
