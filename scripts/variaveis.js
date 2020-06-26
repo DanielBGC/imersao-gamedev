@@ -18,6 +18,8 @@ let imagemPersonagem;
 let vida;
 let imagemVida;
 
+let fita;
+
 let inimigo;
 let imagemInimigo;
 

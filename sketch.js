@@ -16,6 +16,8 @@ function preload() {
 
     trilhaSonora = loadSound('assets/sons/trilha_jogo.mp3')
     somPulo = loadSound('assets/sons/somPulo.mp3')
+
+    fita = loadJSON('fitas/fita.json')
 }
 
 function setup() {
