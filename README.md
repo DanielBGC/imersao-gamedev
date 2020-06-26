@@ -28,7 +28,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Esse jogo foi desenvolvido durante a imersão game-dev, disponibilizado pela Alura, entre os dias 22 e 26 de junho de 2020.
 
-Você pode conferir o [jogo aqui](<https://danielbgc.github.io/imersao-gamedev/>). 
+Você pode conferir o <a href="https://danielbgc.github.io/imersao-gamedev/" target="_blank"> jogo aqui. </a> 
 
 ## 🤔 Como contribuir
 
