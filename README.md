@@ -1,5 +1,6 @@
-# Imersão Game-Dev
-
+<h1 align="center">
+    Imersão Game-Dev
+</h1>
 
 
 <p align="center">
