@@ -30,7 +30,7 @@ class Jogo {
         // trilhaSonora.play()
 
         //Executa a música várias vezes
-        // trilhaSonora.loop()
+        trilhaSonora.loop()
 
         loop()
     }
