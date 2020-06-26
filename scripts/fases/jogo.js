@@ -1,7 +1,28 @@
 class Jogo {
     constructor() {
         this.indexInimigoAtual = 0;
-       
+        this.mapa = [
+            {
+                inimigo: 0,
+                velocidade: 10
+            },
+            {
+                inimigo: 1,
+                velocidade: 13
+            },
+            {
+                inimigo: 2,
+                velocidade: 30
+            },
+            {
+                inimigo: 2,
+                velocidade: 25
+            }, 
+            {
+                inimigo: 1,
+                velocidade: 25
+            }
+        ]
     }
 
     startJogo() {
@@ -17,9 +38,9 @@ class Jogo {
         vida  = new Vida(5, 3)
 
         //constructor(matriz, imagem, X, Y, largura, atura, larguraSprite, alturaSprite, velocidade, delay, precisaoX, precisaoY, precisaoLargura, precisaoAltura)
-        const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 100, 20, 30, 20, 30)
-        const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 100, 30, 50, 50, 70)
-        const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 100, 100, 100, 150, 130)
+        const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 20, 30, 20, 30)
+        const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 30, 50, 50, 70)
+        const inimigoTroll = new Inimigo(matrizInimigoTroll, imagemInimigoTroll, width, 0, 200, 200, 400, 400, 8, 100, 100, 150, 130)
 
         inimigos.push(inimigo)
         inimigos.push(inimigoVoador)
@@ -73,27 +94,32 @@ class Jogo {
             personagem.anda('frente')
         if (keyIsDown(LEFT_ARROW) || keyIsDown(65))
             personagem.anda('tras')
-
-        const inimigo = inimigos[this.indexInimigoAtual];
-
+            
+        const linhaAtual = this.mapa[this.indexInimigoAtual]
+        
+        const inimigo = inimigos[linhaAtual.inimigo];
+        
         //Condição pra saber se o inimigo está visivel na tela
         const inimigoVisivel = inimigo.x < - inimigo.largura;
+
+        inimigo.velocidade = linhaAtual.velocidade
 
         inimigo.exibe();
         inimigo.move();
         inimigo.anda();
 
         if (inimigoVisivel) {
-            // indexInimigoAtual++;
-            // if(indexInimigoAtual > 2) {
-            //     indexInimigoAtual = 0;
-            // }
+            this.indexInimigoAtual++;
+            inimigo.aparece()
+            if(this.indexInimigoAtual > this.mapa.length - 1) {
+                this.indexInimigoAtual = 0;
+            }
 
             //randomiza a ordem de aparição dos inimigos
-            this.indexInimigoAtual = parseInt(random(0, inimigos.length))
+            // this.indexInimigoAtual = parseInt(random(0, inimigos.length))
 
             //randomiza a velocidade de cada inimigo
-            inimigo.velocidade = parseInt(random(10, 30))
+            // inimigo.velocidade = parseInt(random(10, 30))
         }
 
         if (personagem.estaColidindo(inimigo, inimigo.precisaoX, inimigo.precisaoY, inimigo.precisaoLargura, inimigo.precisaoAltura)) {
