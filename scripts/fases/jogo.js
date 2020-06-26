@@ -13,6 +13,8 @@ class Jogo {
         pontuacao = new Pontuacao()
         personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270, 20, 10, 40, 10)
 
+        vida  = new Vida(5, 3)
+
         //constructor(matriz, imagem, X, Y, largura, atura, larguraSprite, alturaSprite, velocidade, delay, precisaoX, precisaoY, precisaoLargura, precisaoAltura)
         const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 100, 20, 30, 20, 30)
         const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width, 260, 100, 75, 200, 150, 13, 100, 30, 50, 50, 70)
@@ -47,17 +49,22 @@ class Jogo {
         cenario.exibe();
         cenario.move();
 
+        vida.draw();
+
         pontuacao.exibe();
         pontuacao.incremento();
+
+        // if(parseInt(pontuacao.pontos) === 100)
+        //     vida.ganhaVida()
 
         personagem.exibe();
         personagem.move();
         personagem.aplicaGravidade();
         personagem.anda()
 
-        if (keyIsDown(RIGHT_ARROW))
+        if (keyIsDown(RIGHT_ARROW) || keyIsDown(68))
             personagem.anda('frente')
-        if (keyIsDown(LEFT_ARROW))
+        if (keyIsDown(LEFT_ARROW) || keyIsDown(65))
             personagem.anda('tras')
 
         const inimigo = inimigos[this.indexInimigoAtual];
@@ -83,9 +90,18 @@ class Jogo {
         }
 
         if (personagem.estaColidindo(inimigo, inimigo.precisaoX, inimigo.precisaoY, inimigo.precisaoLargura, inimigo.precisaoAltura)) {
-            image(imagemGameOver, width / 2 - 200, height / 2 - 200)
-            noLoop()
-            trilhaSonora.stop()
+            
+            vida.perdeVida()
+
+            //torna o personagem invencivel por 1 segundo após colidir com algum inimigo
+            personagem.ficaInvencivel()
+            
+            //para o jogo somente quando a vida chegar em 0
+            if(vida.vidas === 0) {
+                image(imagemGameOver, width / 2 - 200, height / 2 - 200)
+                noLoop()
+                trilhaSonora.stop()
+            }
         }
     }
 }

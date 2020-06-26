@@ -12,6 +12,8 @@ class Personagem extends Animacao {
         this.precisaoY = precisaoY;
         this.precisaoAltura = precisaoAltura;
         this.precisaoLargura = precisaoLargura;
+
+        this.invencivel = false;
     }
 
     pula() {
@@ -54,8 +56,18 @@ class Personagem extends Animacao {
         }
     }
 
-    estaColidindo(inimigo, precisaoX, precisaoY, precisaoLargura, precisaoAltura) {
+    //torna o personagem invencivel por 1 segundo após colidir com algum inimigo
+    ficaInvencivel() {
+        this.invencivel = true;
+        setTimeout(() => {
+            this.invencivel = false;
+        }, 1000)
+    }
 
+    estaColidindo(inimigo, precisaoX, precisaoY, precisaoLargura, precisaoAltura) {
+        if(this.invencivel) {
+            return false;
+        }
         const colisao = collideRectRect(
             this.x + this.precisaoX, 
             this.y + this.precisaoY, 

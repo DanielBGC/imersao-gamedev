@@ -6,6 +6,8 @@ function preload() {
     imagemCenario = loadImage('assets/imagens/cenario/floresta.png')
     imagemPersonagem = loadImage('assets/imagens/personagem/correndo.png')
 
+    imagemVida = loadImage('assets/imagens/assets/coracao.png')
+
     imagemInimigo = loadImage('assets/imagens/inimigos/gotinha.png')
     imagemInimigoTroll = loadImage('assets/imagens/inimigos/troll.png')
     imagemInimigoVoador = loadImage('assets/imagens/inimigos/gotinha-voadora.png')

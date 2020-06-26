@@ -15,6 +15,9 @@ let imagemCenario;
 let personagem;
 let imagemPersonagem;
 
+let vida;
+let imagemVida;
+
 let inimigo;
 let imagemInimigo;
 
