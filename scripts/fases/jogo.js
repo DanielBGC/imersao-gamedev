@@ -1,6 +1,7 @@
 class Jogo {
     constructor() {
         this.indexInimigoAtual = 0;
+       
     }
 
     startJogo() {
@@ -54,8 +55,14 @@ class Jogo {
         pontuacao.exibe();
         pontuacao.incremento();
 
-        // if(parseInt(pontuacao.pontos) === 100)
-        //     vida.ganhaVida()
+        //ganha uma vida sempre que passar a pontuação chegar em 60 (1 minuto)
+        if(parseInt(pontuacao.pontos) % 60 === 0 && parseInt(pontuacao.pontos) != 0) {
+            vida.ganhaVida()
+
+            //o personagem só pode ganhar vida novamente após 1 segundo
+            vida.delayVida()
+        }
+             
 
         personagem.exibe();
         personagem.move();
