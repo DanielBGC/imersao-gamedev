@@ -12,10 +12,18 @@
   <a href="#memo-licença">Licença</a>
 </p>
 
-  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=7159c1&labelColor=000000">
-</p>
-
 <br>
+
+![GitHub language count](https://img.shields.io/github/languages/count/danielbgc/imersao-gamedev)
+<br>
+![GitHub top language](https://img.shields.io/github/languages/top/danielbgc/imersao-gamedev)
+<br>
+![GitHub repo size](https://img.shields.io/github/repo-size/danielbgc/imersao-gamedev)
+<br>
+![GitHub](https://img.shields.io/github/license/danielbgc/imersao-gamedev) 
+<br>
+
+
 
 ## 🚀 Tecnologias
 
